@@ -1,9 +1,9 @@
 import json
 
 def main_menu():
-    doc_du_lieu()  # Đọc dữ liệu từ tệp khi khởi động chương trình
+    doc_du_lieu()  # Đọc dữ liệu sản phẩm khi khởi động
+    doc_du_lieu_khach_hang()  # Đọc dữ liệu khách hàng khi khởi động
     while True:
-        print("----------------------------------------")
         print("Menu quản lý cửa hàng điện thoại")
         print("1. Thêm sản phẩm mới")
         print("2. Sửa thông tin sản phẩm")
@@ -41,13 +41,14 @@ def main_menu():
         elif choice == 8:
             them_khach_hang_moi()
         elif choice == 9:
-            sua_thong_tin_khach_hang()  # Đổi tên hàm phù hợp
+            sua_thong_tin_khach_hang()
         elif choice == 10:
             xem_danh_sach_khach_hang()
         
         elif choice == 0:
             print("Chương trình kết thúc.")
-            luu_du_lieu()  # Lưu dữ liệu trước khi thoát
+            luu_du_lieu()  # Lưu dữ liệu sản phẩm trước khi thoát
+            luu_du_lieu_khach_hang()  # Lưu dữ liệu khách hàng trước khi thoát
             break
         else:
             print("Lựa chọn không hợp lệ. Vui lòng chọn lại.")
