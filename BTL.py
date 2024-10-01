@@ -4,7 +4,8 @@ def main_menu():
     doc_du_lieu()  # Đọc dữ liệu sản phẩm khi khởi động
     doc_du_lieu_khach_hang()  # Đọc dữ liệu khách hàng khi khởi động
     while True:
-        print("Menu quản lý cửa hàng điện thoại")
+        print(f"---------------------------------------")
+        print("Menu")
         print("1. Thêm sản phẩm mới")
         print("2. Sửa thông tin sản phẩm")
         print("3. Xóa sản phẩm")
@@ -17,7 +18,7 @@ def main_menu():
         print("10. Xem danh sách khách hàng")
         
         print("0. Thoát")
-
+        print(f"---------------------------------------")
         try:
             choice = int(input("Nhập lựa chọn của bạn: "))
         except ValueError:
@@ -79,7 +80,6 @@ def sua_san_pham():
                 print("Dữ liệu không hợp lệ. Vui lòng nhập lại.")
                 return
             print("Sản phẩm đã được sửa.")
-            luu_du_lieu()  # Lưu dữ liệu sau khi sửa
             return
     print("Không tìm thấy sản phẩm.")
 
@@ -102,20 +102,18 @@ def xem_danh_sach_san_pham():
             print(f"{i+1}. {san_pham['ten']} - Giá: {san_pham['gia']} - Số lượng: {san_pham['soluong']}")
 
 def luu_du_lieu():
-    with open('data.json', 'w') as f:
+    with open('info.json', 'w') as f:
         json.dump(products, f)
 
 def doc_du_lieu():
     global products
     try:
-        with open('data.json', 'r') as f:
+        with open('info.json', 'r') as f:
             products = json.load(f)
     except FileNotFoundError:
         pass
 
-# Thêm hàm này nếu bạn có dữ liệu khách hàng, chưa có thì xóa dòng menu liên quan
-def sua_thong_tin_khach_hang():
-    pass  # Placeholder cho hàm sửa thông tin khách hàng
+
 # Hàm tìm kiếm sản phẩm theo tên
 def tim_kiem_san_pham():
     ten_tim_kiem = input("Nhập tên sản phẩm cần tìm: ").lower()
@@ -133,6 +131,9 @@ def loc_san_pham():
     try:
         gia_min = float(input("Nhập giá thấp nhất: "))
         gia_max = float(input("Nhập giá cao nhất: "))
+        if gia_min > gia_max:
+            print("Giá thấp nhất không thể lớn hơn giá cao nhất.")
+            return
     except ValueError:
         print("Dữ liệu không hợp lệ. Vui lòng nhập số.")
         return
